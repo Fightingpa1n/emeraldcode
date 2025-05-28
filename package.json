@@ -1,0 +1,413 @@
+{
+    "name": "emeraldcode",
+    "displayName": "EmeraldCode",
+    "description": "an extension I made for myself, which adds various util features",
+    "icon": "icon.png",
+    "version": "1.0.0",
+    "author": "Fightingpainter",
+    "engines": {
+        "vscode": "^1.100.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [],
+    "main": "./main.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "emeraldcode.copySelectionToClipboard",
+                "title": "Copy Selection to Clipboard",
+                "category": "EmeraldCode",
+                "description": "Copies the selected text to the clipboard, wrapped in a fenced code block."
+            },
+            {
+                "command": "emeraldcode.copyExplorerSelection",
+                "title": "Copy Explorer Selection",
+                "category": "EmeraldCode",
+                "description": "Copies the contents of the selected files to the clipboard, each wrapped in a fenced code block and labeled by file name."
+            },
+            {
+                "command": "emeraldcode.copyRelativeExplorerSelection",
+                "title": "Copy Relative Explorer Selection",
+                "category": "EmeraldCode",
+                "description": "Copies the contents of the selected files to the clipboard, each wrapped in a fenced code block and labeled with its relative path."
+            },
+            {
+                "command": "emeraldcode.copyCurrent",
+                "title": "Copy Current File",
+                "category": "EmeraldCode",
+                "description": "Copies the current file’s content to the clipboard, wrapped in a fenced code block and labeled by file name."
+            },
+            {
+                "command": "emeraldcode.copyRelativeCurrent",
+                "title": "Copy Relative Current File",
+                "category": "EmeraldCode",
+                "description": "Copies the current file’s content to the clipboard, wrapped in a fenced code block and labeled with its relative path."
+            },
+            {
+                "command": "emeraldcode.copySelection",
+                "title": "Copy Selection",
+                "category": "EmeraldCode",
+                "description": "Copies the selected text to the clipboard, wrapped in a fenced code block and labeled by file name."
+            },
+            {
+                "command": "emeraldcode.copyRelativeSelection",
+                "title": "Copy Relative Selection",
+                "category": "EmeraldCode",
+                "description": "Copies the selected text to the clipboard, wrapped in a fenced code block and labeled with the relative file path."
+            },
+            {
+                "command": "emeraldcode.insertSplitter",
+                "title": "Insert Splitter",
+                "category": "EmeraldCode",
+                "description": "Inserts a generic splitter line at the current cursor position."
+            },
+            {
+                "command": "emeraldcode.splitter1",
+                "title": "Splitter 1",
+                "category": "EmeraldCode",
+                "description": "Inserts the custom splitter defined as 'Splitter 1'."
+            },
+            {
+                "command": "emeraldcode.splitter2",
+                "title": "Splitter 2",
+                "category": "EmeraldCode",
+                "description": "Inserts the custom splitter defined as 'Splitter 2'."
+            },
+            {
+                "command": "emeraldcode.splitter3",
+                "title": "Splitter 3",
+                "category": "EmeraldCode",
+                "description": "Inserts the custom splitter defined as 'Splitter 3'."
+            },
+            {
+                "command": "emeraldcode.splitter4",
+                "title": "Splitter 4",
+                "category": "EmeraldCode",
+                "description": "Inserts the custom splitter defined as 'Splitter 4'."
+            }
+        ],
+        "submenus": [
+            {
+                "id": "emeraldcode.splitters",
+                "label": "Splitters"
+            },
+            {
+                "id": "emeraldcode.explorercopy",
+                "label": "Fancy Copy"
+            },
+            {
+                "id": "emeraldcode.editorcopy",
+                "label": "Fancy Copy"
+            }
+        ],
+        "menus": {
+            "explorer/context": [
+                {
+                    "submenu": "emeraldcode.explorercopy",
+                    "when": "resourceLangId",
+                    "group": "0_emeraldcode_b"
+                }
+            ],
+            "editor/context": [
+                {
+                    "submenu": "emeraldcode.splitters",
+                    "when": "editorTextFocus",
+                    "group": "0_emeraldcode_a"
+                },
+                {
+                    "command": "emeraldcode.copySelectionToClipboard",
+                    "when": "editorHasSelection",
+                    "group": "0_emeraldcode_b"
+                },
+                {
+                    "submenu": "emeraldcode.editorcopy",
+                    "when": "editorLangId",
+                    "group": "0_emeraldcode_b"
+                }
+            ],
+            "emeraldcode.splitters": [
+                {
+                    "command": "emeraldcode.insertSplitter",
+                    "group": "0_insert"
+                },
+                {
+                    "command": "emeraldcode.splitter1",
+                    "group": "1_insert"
+                },
+                {
+                    "command": "emeraldcode.splitter2",
+                    "group": "1_insert"
+                },
+                {
+                    "command": "emeraldcode.splitter3",
+                    "group": "1_insert"
+                },
+                {
+                    "command": "emeraldcode.splitter4",
+                    "group": "1_insert"
+                }
+            ],
+            "emeraldcode.explorercopy": [
+                {
+                    "command": "emeraldcode.copyExplorerSelection",
+                    "when": "resourceLangId",
+                    "group": "0_insert"
+                },
+                {
+                    "command": "emeraldcode.copyRelativeExplorerSelection",
+                    "when": "resourceLangId && workspaceFolderCount > 0",
+                    "group": "0_insert"
+                }
+            ],
+            "emeraldcode.editorcopy": [
+                {
+                    "command": "emeraldcode.copySelection",
+                    "when": "editorHasSelection",
+                    "group": "0_insert"
+                },
+                {
+                    "command": "emeraldcode.copyRelativeSelection",
+                    "when": "editorHasSelection && workspaceFolderCount > 0",
+                    "group": "0_insert"
+                },
+                {
+                    "command": "emeraldcode.copyCurrent",
+                    "when": "editorLangId",
+                    "group": "1_insert"
+                },
+                {
+                    "command": "emeraldcode.copyRelativeCurrent",
+                    "when": "editorLangId && workspaceFolderCount > 0",
+                    "group": "1_insert"
+                }
+            ]
+        },
+        "configuration": {
+            "title": "EmeraldCode Settings",
+            "properties": {
+                "emeraldcode.defaultStart": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Default start symbol for comment definitions"
+                },
+                "emeraldcode.defaultEnd": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Default end symbol for comment definitions"
+                },
+                "emeraldcode.addCommentDefinition": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether it should add comment definitions automatically when encountering a new language."
+                },
+                "emeraldcode.splitter1": {
+                    "type": "string",
+                    "default": "title",
+                    "description": "The splitter key to use for the first splitter command."
+                },
+                "emeraldcode.splitter2": {
+                    "type": "string",
+                    "default": "big",
+                    "description": "The splitter key to use for the second splitter command."
+                },
+                "emeraldcode.splitter3": {
+                    "type": "string",
+                    "default": "small",
+                    "description": "The splitter key to use for the third splitter command."
+                },
+                "emeraldcode.splitter4": {
+                    "type": "string",
+                    "default": "split",
+                    "description": "The splitter key to use for the fourth splitter command."
+                },
+                "emeraldcode.splitters": {
+                    "type": "array",
+                    "default": [
+                        {
+                            "key": "title",
+                            "format": "========================================[ %s ]========================================"
+                        },
+                        {
+                            "key": "big",
+                            "format": "======================================== %s ========================================"
+                        },
+                        {
+                            "key": "small",
+                            "format": "==================== %s ===================="
+                        },
+                        {
+                            "key": "split",
+                            "format": "----------------------------------------"
+                        }
+                    ],
+                    "description": "Defines Splitter Types.",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "key": {
+                                "type": "string",
+                                "description": "the key of the splitter. used to identify the splitter"
+                            },
+                            "format": {
+                                "type": "string",
+                                "default": "======================================== %s ========================================",
+                                "description": "the splitter format. %s represents the selcted text, or where the title will be, if no %s is found it will just replace the selcted text"
+                            }
+                        },
+                        "required": [
+                            "key",
+                            "format"
+                        ]
+                    }
+                },
+                "emeraldcode.commentDef": {
+                    "type": "array",
+                    "default": [
+                        {
+                            "langId": "javascript",
+                            "start": "//",
+                            "end": ""
+                        },
+                        {
+                            "langId": "typescript",
+                            "start": "//",
+                            "end": ""
+                        },
+                        {
+                            "langId": "python",
+                            "start": "#",
+                            "end": ""
+                        },
+                        {
+                            "langId": "html",
+                            "start": "<!--",
+                            "end": "-->"
+                        },
+                        {
+                            "langId": "css",
+                            "start": "/*",
+                            "end": "*/"
+                        },
+                        {
+                            "langId": "json",
+                            "start": "//",
+                            "end": ""
+                        },
+                        {
+                            "langId": "java",
+                            "start": "//",
+                            "end": ""
+                        },
+                        {
+                            "langId": "c",
+                            "start": "//",
+                            "end": ""
+                        },
+                        {
+                            "langId": "cpp",
+                            "start": "//",
+                            "end": ""
+                        },
+                        {
+                            "langId": "csharp",
+                            "start": "//",
+                            "end": ""
+                        },
+                        {
+                            "langId": "go",
+                            "start": "//",
+                            "end": ""
+                        },
+                        {
+                            "langId": "rust",
+                            "start": "//",
+                            "end": ""
+                        },
+                        {
+                            "langId": "ruby",
+                            "start": "#",
+                            "end": ""
+                        },
+                        {
+                            "langId": "shellscript",
+                            "start": "#",
+                            "end": ""
+                        },
+                        {
+                            "langId": "xml",
+                            "start": "<!--",
+                            "end": "-->"
+                        },
+                        {
+                            "langId": "markdown",
+                            "start": "<!--",
+                            "end": "-->"
+                        }
+                    ],
+                    "description": "Comment definitons for each language.",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "langId": {
+                                "type": "string",
+                                "description": "Language ID (e.g., 'javascript', 'python')"
+                            },
+                            "start": {
+                                "type": "string",
+                                "description": "Start symbol for comments"
+                            },
+                            "end": {
+                                "type": "string",
+                                "description": "End symbol for comments (if any)"
+                            }
+                        },
+                        "required": [
+                            "langId",
+                            "start",
+                            "end"
+                        ]
+                    }
+                },
+                "emeraldcode.disallowedFileExtensions": {
+                    "type": "array",
+                    "default": [
+                        ".exe",
+                        ".dll",
+                        ".so",
+                        ".dylib",
+                        ".bin",
+                        ".o",
+                        ".a",
+                        ".lib",
+                        ".png",
+                        ".jpg",
+                        ".jpeg",
+                        ".gif"
+                    ],
+                    "description": "File extensions that should be ignored when copying file contents.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "scripts": {
+        "lint": "eslint .",
+        "pretest": "npm run lint",
+        "test": "vscode-test"
+    },
+    "devDependencies": {
+        "@types/mocha": "^10.0.10",
+        "@types/node": "20.x",
+        "@types/vscode": "^1.100.0",
+        "@vscode/test-cli": "^0.0.10",
+        "@vscode/test-electron": "^2.5.2",
+        "eslint": "^9.25.1"
+    },
+    "dependencies": {
+        "emeraldcode": "file:"
+    }
+}
