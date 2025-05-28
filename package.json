@@ -15,6 +15,7 @@
         "type": "git",
         "url": "https://github.com/Fightingpa1n/emeraldcode.git"
     },
+    "license": "SEE LICENSE.txt",
     "activationEvents": [],
     "main": "./main.js",
     "contributes": {
