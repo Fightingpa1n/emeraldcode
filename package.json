@@ -4,6 +4,7 @@
     "description": "an extension I made for myself, which adds various util features",
     "icon": "icon.png",
     "version": "1.0.0",
+    "publisher": "fightingpainter",
     "author": "Fightingpainter",
     "engines": {
         "vscode": "^1.100.0"
